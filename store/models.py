@@ -17,7 +17,7 @@ class Product(models.Model):
     image = models.ImageField(null=True,blank=True)
     #image
     def __str__(self):
-        return self.name,self.price,self.image
+        return self.name
 class Order(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL,null=True,blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
