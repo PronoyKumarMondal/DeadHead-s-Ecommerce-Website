@@ -46,8 +46,7 @@
 
         <div class="box-element hidden" id="payment-info">
             <small>Paypal Options</small>
-            <div id="paypal-button-container"></div>
-            <!--<button id="make-payment">Make Payment</button>-->
+           <button id="make-payment">Make Payment</button>
         </div>
     </div>
 
@@ -70,18 +69,10 @@
         </div>
     </div>
 </div>
-<script src="https://checkout.sandbox.bka.sh/v1.2.0-beta/checkout/payment/create"></script>
-
-<script>
-headers = {
-    "accept": "application/json",
-    "content-type": "application/json"
-}
-response = requests.post(url, headers=headers)
-</script>
 
 
 <script type="text/javascript">
+    var user = '{{ request.user }}';
     var shipping ='{{order.shipping}}'
     
     var total ='{{order.get_cart_total}}'
@@ -105,11 +96,11 @@ response = requests.post(url, headers=headers)
         document.getElementById('payment-info').classList.remove("hidden");
 
     })
-    /*
+    
     document.getElementById('make-payment').addEventListener('click',function(e){
         submitFormData()
     });
-    */
+    
     function submitFormData(){
         console.log("Payment Button Clicked")
         var userFormData ={
@@ -148,10 +139,10 @@ response = requests.post(url, headers=headers)
         .then((data) => {
             console.log('Success:',data);
             alert('Transaction Completed');
-            cart={}
-            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
-            window.location.href = "{% url 'store' %}"
-        })
+            cart = {};
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+            window.location.href = "{% url 'store' %}";
+        });
     }
-</>
+</script>
 {% endblock content %}
